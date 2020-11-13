@@ -13,7 +13,7 @@ def main():
     app = Calculator(root)
     root.mainloop()
 
-if __name__ == __"main":
+if __name__ == "__main__":
     main()
 
 
