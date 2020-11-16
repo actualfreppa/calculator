@@ -27,7 +27,7 @@ class Calculator:
         self.bsubt = ttk.Button(self.master, text="-", command=lambda: self.button_press("+"))
         self.bdiv = ttk.Button(self.master, text="/", command=lambda: self.button_press("+"))
         self.bmult = ttk.Button(self.master, text="*", command=lambda: self.button_press("+"))
-        self.beq = ttk.Button(self.master, text="=", command=lambda: self.button_press("="))
+        self.beq = ttk.Button(self.master, text="=", command=self.button_press_eq)
         self.b_clear = ttk.Button(self.master, text="Clear", command=self.clear)
         self.b_quit = ttk.Button(self.master, text="Quit", command=self.quit)
         
@@ -48,16 +48,24 @@ class Calculator:
         self.bmult.grid(row=2, column=3)
         self.bsubt.grid(row=3, column=3)
         self.badd.grid(row=4, column=3)
-        self.bcomma.grid(row=4, column=0)
+        #self.bcomma.grid(row=4, column=0)
         self.beq.grid(row=4, column=2)
-        #self.b_clear.grid(row=4, column=1)
-        #self.b_quit.grid(row=4, column=2)
+        self.b_clear.grid(row=4, column=0)
+        self.b_quit.grid(row=5, column=0)
 
     def button_press(self, num):
         #self.e.delete(0, END)
         #s = self.e.get()
         #self.e.insert(0, self.e.get() + num)
         self.e.insert(END, num)
+
+    def button_press_eq(self):
+        expression = self.e.get()
+        self.e.delete(0, END)
+
+        # TODO Refactor, do not use eval!!!
+        self.e.insert(0, eval(expression))
+
 
     def clear(self):
         self.e.delete(0, END)
